@@ -71,7 +71,7 @@ This project provides a robust, real-world realization of textbook Management In
 
 ### 4. How to Run the project
 Clone the Repository
-`git clone https://github.com/username/repository-name.git`
+`git clone https://github.com/G-Elvis/Retail-Sales-Inventory-Engine`
 
 Install Requirements
 `pip install -r requirements.txt`
