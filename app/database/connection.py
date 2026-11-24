@@ -19,7 +19,7 @@ def get_db_path() -> Path:
     return DEFAULT_DB_PATH
 
 
-def create_connection(db_path: Path | None = None) -> sqlite3.Connection:
+def create_connection(db_path: Path | str | None = None) -> sqlite3.Connection:
     """
     Create and configure a connection to SQLite database.
     
@@ -27,7 +27,10 @@ def create_connection(db_path: Path | None = None) -> sqlite3.Connection:
     1. Foreign key constraints (PRAGMA foreign_keys = ON).
     2. Row factory for dict-like column access.
     """
-    path = db_path if db_path is not None else get_db_path()
+    if db_path is not None:
+        path = Path(db_path)
+    else:
+        path = get_db_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     
     conn = sqlite3.connect(str(path))
