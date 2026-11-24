@@ -72,4 +72,8 @@ This project provides a robust, real-world realization of textbook Management In
 ### 4. How to Run the project
 Clone the Repository
 `git clone https://github.com/username/repository-name.git`
+
+Install Requirements
+`pip install -r requirements.txt`
+
 Run `python3 main.py`
