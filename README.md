@@ -25,38 +25,17 @@ Retailers without an integrated data pipeline experience severe operational bott
 ### 2.1 Tiered Architectural Model
 The software is organized into four distinct layers:
 
-+-----------------------------------------------------------------------------------+
-|                               PRESENTATION TIER                                   |
-|                        Interactive Terminal CLI (menu.py)                         |
-|             Provides cashier POS workflow and executive MIS dashboards.           |
-+-----------------------------------------------------------------------------------+
-                                         |
-                                         v
-+-----------------------------------------------------------------------------------+
-|                                APPLICATION TIER                                   |
-|       +----------------------------------+  +-----------------------------------+ |
-|       |       TPS Service Layer          |  |        MIS Service Layer          | |
-|       |     (app/tps/tps_service.py)     |  |     (app/mis/mis_service.py)      | |
-|       | - Input sanitization             |  | - Daily & weekly group-by queries | |
-|       | - Inventory threshold validation |  | - Reorder quantity formulas       | |
-|       | - Atomic transaction boundaries  |  | - Best-seller ranking pipelines   | |
-|       +----------------------------------+  +-----------------------------------+ |
-+-----------------------------------------------------------------------------------+
-                                         |
-                                         v
-+-----------------------------------------------------------------------------------+
-|                                DATA ACCESS TIER                                   |
-|                    Connection & Schema Manager (connection.py)                    |
-|       - PRAGMA foreign_keys = ON;                                                 |
-|       - Row factory mapping (sqlite3.Row)                                         |
-+-----------------------------------------------------------------------------------+
-                                         |
-                                         v
-+-----------------------------------------------------------------------------------+
-|                                PERSISTENCE TIER                                   |
-|                         SQLite Engine (retail_engine.db)                          |
-|         Tables: Products (1)  <---------->  (N) Sales                             |
-+-----------------------------------------------------------------------------------+
+
+1. PRESENTATION TIER -> Interactive Terminal CLI (menu.py) -> Provides cashier POS workflow and executive MIS dashboards.
+
+2. APPLICATION TIER -> :
+            TPS Service Layer -> (app/tps/tps_service.py): Input sanitization, Inventory threshold validation, Atomic transaction boundaries  
+
+            MIS Service Layer  -> (app/mis/mis_service.py): - Daily & weekly group-by queries, Reorder quantity formulas, Best-seller ranking pipelines  
+
+3. DATA ACCESS TIER -> Connection & Schema Manager (connection.py)       
+
+4.  PERSISTENCE TIER -> SQLite Engine (retail_engine.db):Tables: Products (1) <---------->(N) Sales  
 
 ### 2.2 Entity Relationship Diagram (ERD)
 
